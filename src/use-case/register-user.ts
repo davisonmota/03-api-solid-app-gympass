@@ -28,5 +28,5 @@ export async function registerUserUseCase (
   const passwordHash = await hash(password, 12)
 
   const prismaUsersRepository = new PrismaUsersRepository()
-  await prismaUsersRepository.create({ name, email, password_hash: passwordHash })
+  await prismaUsersRepository.create({ name, email, passwordHash })
 }
