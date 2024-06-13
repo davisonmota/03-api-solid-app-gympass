@@ -18,7 +18,7 @@ model User {
   name          String
   email         String    @unique
   password_hash String
-  creatade_at   DateTime  @default(now())
+  created_at    DateTime  @default(now())
   CheckIns      CheckIn[]
 
   @@map("users")
