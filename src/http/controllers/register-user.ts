@@ -17,6 +17,7 @@ export async function registerUser (
     await registerUserUseCase({ name, email, password })
     return replay.status(201).send()
   } catch (error) {
+    console.error(error)
     return replay.status(409).send()
   }
 }
