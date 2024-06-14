@@ -24,6 +24,7 @@ module.exports = {
     "rules": {
       "@typescript-eslint/no-floating-promises": "off",
       "@typescript-eslint/return-await": "off",
-      "@typescript-eslint/strict-boolean-expressions": "off"
+      "@typescript-eslint/strict-boolean-expressions": "off",
+      "@typescript-eslint/method-signature-style": "off"
     }
 }
