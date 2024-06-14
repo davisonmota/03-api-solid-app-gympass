@@ -20,14 +20,12 @@ export async function registerUser (
     const prismaUsersRepository = new PrismaUsersRepository()
     const registerUserUseCase = new RegisterUserUseCase(prismaUsersRepository)
     const user = await registerUserUseCase.execute({ name, email, password })
-
     return replay.status(201).send(user)
   } catch (error) {
     if (error instanceof EmailAlreadyExistsError) {
       return replay.status(409).send({ message: error.message })
     }
 
-    console.error(error)
-    return replay.status(500).send({ Error: 'Internal server Error' })
+    throw error
   }
 }
