@@ -15,7 +15,7 @@ export class RegisterUserUseCase {
     name,
     email,
     password
-  }: RegisterUserUseCaseRequest): Promise<User> {
+  }: RegisterUserUseCaseRequest): Promise<Omit<User, 'passwordHash'>> {
     const passwordHash = await hash(password, 12)
 
     const userWithEmail = await this.usersRepository.findByEmail(email)
@@ -24,6 +24,11 @@ export class RegisterUserUseCase {
       throw new EmailAlreadyExistsError()
     }
 
-    return await this.usersRepository.create({ name, email, passwordHash })
+    const userData = await this.usersRepository.create({ name, email, passwordHash })
+    return {
+      id: userData.id,
+      name: userData.name,
+      email: userData.email
+    }
   }
 }
