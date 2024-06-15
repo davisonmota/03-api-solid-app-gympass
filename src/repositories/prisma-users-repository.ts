@@ -14,7 +14,8 @@ export class PrismaUsersRepository implements UsersRepository {
     return {
       id: userData.id,
       email: userData.email,
-      name: userData.name
+      name: userData.name,
+      passwordHash: userData.password_hash
     }
   }
 
@@ -30,7 +31,8 @@ export class PrismaUsersRepository implements UsersRepository {
     return {
       id: userData.id,
       name: userData.name,
-      email: userData.email
+      email: userData.email,
+      passwordHash: userData.password_hash
     }
   }
 }
