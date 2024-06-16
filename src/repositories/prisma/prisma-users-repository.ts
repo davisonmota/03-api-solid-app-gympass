@@ -1,5 +1,5 @@
 import { prisma } from '@/lib/prisma'
-import { type CreateUser, type User, type UsersRepository } from './users-repository'
+import { type CreateUser, type User, type UsersRepository } from '../users-repository'
 
 export class PrismaUsersRepository implements UsersRepository {
   async create ({ name, email, passwordHash }: CreateUser): Promise<User> {

@@ -1,24 +1,19 @@
-import { type CreateUser, type User, type UsersRepository } from './users-repository'
+import { type User, type CreateUser, type UsersRepository } from '../users-repository'
 
 export class InMemoryUsersRepository implements UsersRepository {
   private readonly users: User[] = []
 
   async create ({ name, email, passwordHash }: CreateUser): Promise<User> {
-    const id = this.users.length.toString()
-
-    this.users.push({
-      id,
-      email,
-      name,
-      passwordHash
-    })
-
-    return {
-      id,
+    const user = {
+      id: this.users.length.toString(),
       email,
       name,
       passwordHash
     }
+
+    this.users.push(user)
+
+    return user
   }
 
   async findByEmail (email: string): Promise<User | null> {
