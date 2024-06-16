@@ -1,9 +1,9 @@
 import { InMemoryUsersRepository } from '@/repositories/in-memory-users-repository'
+import { type UsersRepository } from '@/repositories/users-repository'
+import { hash } from 'bcryptjs'
 import { describe, expect, it } from 'vitest'
 import { AuthenticateUseCase } from './authenticate'
-import { hash } from 'bcryptjs'
 import { InvalidCredentialsError } from './erros/invalid-credentials-error'
-import { type UsersRepository } from '@/repositories/users-repository'
 
 const makeSut = (): { userRepository: UsersRepository, sut: AuthenticateUseCase } => {
   const userRepository = new InMemoryUsersRepository()
