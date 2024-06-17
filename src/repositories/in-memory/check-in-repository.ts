@@ -16,4 +16,11 @@ export class InMemoryCheckInRepository implements CheckInRepository {
 
     return checkIn
   }
+
+  async findByUserIdOnDate (userId: string, date: Date): Promise<CheckIn | null> {
+    const checkInOnSameDate = this.checkIns.find(checkIn => checkIn.userId === userId)
+    if (!checkInOnSameDate) return null
+
+    return checkInOnSameDate
+  }
 }

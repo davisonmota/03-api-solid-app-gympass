@@ -1,4 +1,4 @@
-import { type User, type CreateUser, type UsersRepository } from '../users-repository'
+import { type CreateUser, type User, type UsersRepository } from '../users-repository'
 
 export class InMemoryUsersRepository implements UsersRepository {
   private readonly users: User[] = []
