@@ -107,4 +107,24 @@ describe('CheckIn Use Case', () => {
     expect(checkIn.gymId).toBe('gym-id')
     expect(checkIn.userId).toBe('user-id')
   })
+
+  it('should not be able to check on distant gym', async () => {
+    const { sut, gymRepository } = makeSut()
+
+    await gymRepository.create({
+      id: 'gym-id-02',
+      title: 'Gym Title',
+      description: 'Gym Description',
+      latitude: -18.2393935,
+      longitude: -43.5895216
+    })
+
+    await expect(async () => sut.execute({
+      userId: 'user-id',
+      gymId: 'gym-id-02',
+      checkInDate: new Date(),
+      userLatitude: -18.2454105,
+      userLongitude: -43.6411431
+    })).rejects.toBeInstanceOf(Error)
+  })
 })
