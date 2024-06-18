@@ -38,4 +38,10 @@ export class InMemoryCheckInRepository implements CheckInRepository {
       .filter(checkIn => checkIn.userId === id)
       .slice((page - 1) * 20, page * 20)
   }
+
+  async contByUserId (userId: string): Promise<number> {
+    const checkInByUserId = this.checkIns.filter(checkIn => checkIn.userId === userId)
+
+    return checkInByUserId.length
+  }
 }
