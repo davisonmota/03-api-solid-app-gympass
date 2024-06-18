@@ -1,9 +1,9 @@
-import { type CreateGym, type Gyms, type GymsRepository } from '../gyms-repository'
+import { type CreateGym, type Gym, type GymsRepository } from '../gyms-repository'
 
 export class InMemoryGymsRepository implements GymsRepository {
-  private readonly gyms: Gyms[] = []
+  private readonly gyms: Gym[] = []
 
-  async findById (id: string): Promise<Gyms | null> {
+  async findById (id: string): Promise<Gym | null> {
     const gymData = this.gyms.find(gym => gym.id === id)
     if (!gymData) return null
 
@@ -16,17 +16,15 @@ export class InMemoryGymsRepository implements GymsRepository {
     }
   }
 
-  async create (data: CreateGym): Promise<Gyms> {
+  async create (data: CreateGym): Promise<Gym> {
     const gym = {
       id: data.id ?? this.gyms.length.toString(),
       title: data.title,
-      description: data.description,
+      description: data.description ?? null,
       latitude: data.latitude,
       longitude: data.longitude
     }
-
     this.gyms.push(gym)
-
     return gym
   }
 }

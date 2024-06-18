@@ -2,15 +2,15 @@
 
 ## Requisitos Funcionais
 - [x] Deve ser possível se cadastrar
-- [ ] Deve ser possível se autenticar
-- [ ] Deve ser possível obter o perfil de um usuário logado
+- [x] Deve ser possível se autenticar
+- [x] Deve ser possível obter o perfil de um usuário logado
 - [ ] Deve ser possível obter o número de check-ins realizados pelo usuário logado
 - [ ] Deve ser possível o usuário obter o histórico de check-ins
 - [ ] Deve ser possível o usuário buscar a academias próximas
 - [ ] Deve ser possível o usuário buscar academias pelo nome
 - [x] Deve ser possível o usuário realizar check-in em uma academia
 - [ ] Deve ser possível validar o check-in de um usuário
-- [ ] Deve ser possível cadastras uma academia
+- [x] Deve ser possível cadastras uma academia
 
 ## Regras de Negócios
 - [x] O usuário não deve cadastras com um e-mail já utilizado

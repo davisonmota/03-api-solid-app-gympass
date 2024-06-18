@@ -3,6 +3,8 @@ import { InMemoryCheckInRepository } from '@/repositories/in-memory/in-memory-ch
 import { InMemoryGymsRepository } from '@/repositories/in-memory/in-memory-gyms-repository'
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
 import { CheckInUseCase } from './check-in'
+import { MaxDistanceError } from './erros/max-distance-error'
+import { MaxNumberOfCheckInsError } from './erros/max-number-of-check-ins-error'
 
 const makeSut = (): {
   checkInRepository: InMemoryCheckInRepository
@@ -72,7 +74,7 @@ describe('CheckIn Use Case', () => {
       checkInDate: new Date(),
       userLatitude: 0,
       userLongitude: 0
-    })).rejects.toBeInstanceOf(Error)
+    })).rejects.toBeInstanceOf(MaxNumberOfCheckInsError)
   })
 
   it('should be able to check in twice but in different days', async () => {
@@ -125,6 +127,6 @@ describe('CheckIn Use Case', () => {
       checkInDate: new Date(),
       userLatitude: -18.2454105,
       userLongitude: -43.6411431
-    })).rejects.toBeInstanceOf(Error)
+    })).rejects.toBeInstanceOf(MaxDistanceError)
   })
 })

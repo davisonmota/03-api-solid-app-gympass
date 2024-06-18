@@ -1,7 +1,7 @@
-export interface Gyms {
+export interface Gym {
   id: string
   title: string
-  description?: string
+  description: string | null
   latitude: number
   longitude: number
 }
@@ -9,12 +9,12 @@ export interface Gyms {
 export interface CreateGym {
   id?: string
   title: string
-  description?: string
+  description?: string | null
   latitude: number
   longitude: number
 }
 
 export interface GymsRepository {
-  findById(id: string): Promise<Gyms | null>
-  create(data: CreateGym): Promise<Gyms>
+  findById(id: string): Promise<Gym | null>
+  create(data: CreateGym): Promise<Gym>
 }
