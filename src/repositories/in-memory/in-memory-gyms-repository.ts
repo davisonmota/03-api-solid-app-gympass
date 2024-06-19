@@ -27,4 +27,17 @@ export class InMemoryGymsRepository implements GymsRepository {
     this.gyms.push(gym)
     return gym
   }
+
+  async searchManyBy (query: string, page: number): Promise<Gym[]> {
+    const searchMany = this.gyms
+      .filter(gym => {
+        const titleToLowerCase = gym.title.toLowerCase()
+        const queryToLowerCase = query.toLowerCase()
+        const isSubString = titleToLowerCase.indexOf(queryToLowerCase)
+        return isSubString !== -1
+      })
+      .slice((page - 1) * 20, page * 20)
+
+    return searchMany
+  }
 }
