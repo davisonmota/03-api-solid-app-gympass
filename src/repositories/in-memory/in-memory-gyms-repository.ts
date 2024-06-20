@@ -1,4 +1,5 @@
-import { type CreateGym, type Gym, type GymsRepository } from '../gyms-repository'
+import { getDistanceBetweenCoordinates } from '@/utils/get-distance-between-coordinate'
+import { type Coordinate, type CreateGym, type Gym, type GymsRepository } from '../gyms-repository'
 
 export class InMemoryGymsRepository implements GymsRepository {
   private readonly gyms: Gym[] = []
@@ -39,5 +40,18 @@ export class InMemoryGymsRepository implements GymsRepository {
       .slice((page - 1) * 20, page * 20)
 
     return searchMany
+  }
+
+  async findManyNearby (coordinate: Coordinate): Promise<Gym[]> {
+    return this.gyms.filter(gym => {
+      const distance = getDistanceBetweenCoordinates({
+        latitude: coordinate.latitude,
+        longitude: coordinate.longitude
+      }, {
+        latitude: gym.latitude,
+        longitude: gym.longitude
+      })
+      return distance <= 10 // 10 Kilometro de distancia
+    })
   }
 }

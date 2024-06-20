@@ -69,7 +69,6 @@ describe('Search Gyms Use Case', () => {
       page: 2
     })
 
-    console.log(gyms)
     expect(gyms).toHaveLength(2)
   })
 })

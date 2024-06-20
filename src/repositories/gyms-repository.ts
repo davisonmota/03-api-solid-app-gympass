@@ -14,8 +14,14 @@ export interface CreateGym {
   longitude: number
 }
 
+export interface Coordinate {
+  latitude: number
+  longitude: number
+}
+
 export interface GymsRepository {
   findById(id: string): Promise<Gym | null>
   create(data: CreateGym): Promise<Gym>
   searchManyBy(data: string, page: number): Promise<Gym[]>
+  findManyNearby(coordinate: Coordinate): Promise<Gym[]>
 }
