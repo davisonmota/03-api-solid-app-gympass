@@ -44,4 +44,22 @@ export class InMemoryCheckInRepository implements CheckInRepository {
 
     return checkInByUserId.length
   }
+
+  async findById (id: string): Promise<CheckIn | null> {
+    const checkIn = this.checkIns.find(checkIn => checkIn.id === id)
+
+    if (!checkIn) return null
+
+    return checkIn
+  }
+
+  async updateValidatedAt (id: string, date: Date): Promise<CheckIn | null> {
+    const checkInIndex = this.checkIns.findIndex(checkIn => checkIn.id === id)
+
+    if (checkInIndex === -1) return null
+
+    this.checkIns[checkInIndex].validatedAt = date
+
+    return this.checkIns[checkInIndex]
+  }
 }
