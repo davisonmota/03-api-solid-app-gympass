@@ -18,9 +18,15 @@ export async function authenticate (
 
     const prismaUsersRepository = new PrismaUsersRepository()
     const authenticateUseCase = new AuthenticateUseCase(prismaUsersRepository)
-    const output = await authenticateUseCase.execute({ email, password })
+    const { user } = await authenticateUseCase.execute({ email, password })
 
-    return replay.status(200).send(output)
+    const token = await replay.jwtSign({}, {
+      sign: {
+        sub: user.id
+      }
+    })
+
+    return replay.status(200).send({ user, token })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return replay.status(400).send({ message: error.message })

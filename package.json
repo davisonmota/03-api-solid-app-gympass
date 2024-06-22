@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eslintrc.js",
   "scripts": {
-    "dev": "tsx --watch src/server.ts",
+    "dev": "tsx --env-file=.env --watch src/server.ts",
     "build": "tsup src",
     "start": "node dist/server.js",
     "test": "vitest run",
@@ -35,6 +35,7 @@
     "vitest": "^1.6.0"
   },
   "dependencies": {
+    "@fastify/jwt": "^8.0.1",
     "@prisma/client": "^5.13.0",
     "bcryptjs": "^2.4.3",
     "dayjs": "^1.11.11",
