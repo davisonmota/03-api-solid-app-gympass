@@ -7,9 +7,13 @@
     "dev": "tsx --env-file=.env --watch src/server.ts",
     "build": "tsup src",
     "start": "node dist/server.js",
-    "test": "vitest run",
-    "test:watch": "vitest",
-    "test:ui": "vitest --ui"
+    "test": "vitest run --dir src/use-case",
+    "test:watch": "vitest run --dir src/use-case",
+    "pretest:e2e": "npm link ./prisma/vitest-environment-prisma && npm link vitest-environment-prisma",
+    "test:e2e": "vitest run --dir src/http",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest run --coverage"
+    
   },
   "keywords": [],
   "author": "",
