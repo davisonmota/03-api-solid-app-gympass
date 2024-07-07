@@ -9,7 +9,7 @@ export async function metrics (
 
   const { checkInsCount } = await getUserMetricsUseCase.execute({
     userId: request.user.sub
-
   })
+
   return replay.status(200).send({ checkInsCount })
 }

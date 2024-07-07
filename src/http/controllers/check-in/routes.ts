@@ -9,9 +9,9 @@ import { validate } from './validate'
 export async function checkInsRoutes (app: FastifyInstance): Promise<void> {
   app.addHook('onRequest', verifyJWT)
 
-  app.post('/check-ins/history', history)
-  app.post('/check-ins/metrics', metrics)
+  app.get('/check-ins/history', history)
+  app.get('/check-ins/metrics', metrics)
 
-  app.post('/gyms/:gymIn/check-in', create)
+  app.post('/gyms/:gymId/check-ins', create)
   app.patch('/check-ins/:checkInId/validate', validate)
 }
