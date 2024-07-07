@@ -7,10 +7,10 @@ export async function nearby (
   replay: FastifyReply
 ): Promise<FastifyReply> {
   const nearbyGymsSchema = z.object({
-    latitude: z.number().refine(value => {
+    latitude: z.coerce.number().refine(value => {
       return Math.abs(value) <= 90
     }),
-    longitude: z.number().refine(value => {
+    longitude: z.coerce.number().refine(value => {
       return Math.abs(value) <= 180
     })
   })
@@ -23,5 +23,5 @@ export async function nearby (
     userLatitude: latitude,
     userLongitude: longitude
   })
-  return replay.status(201).send(gyms)
+  return replay.status(200).send(gyms)
 }

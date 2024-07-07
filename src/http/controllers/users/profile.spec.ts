@@ -1,4 +1,5 @@
 import { app } from '@/app'
+import { createAndAuthenticateUser } from '@/utils/test/create-and-authenticate-user'
 import supertest from 'supertest'
 import { afterAll, beforeAll, describe, expect, it } from 'vitest'
 
@@ -12,22 +13,7 @@ describe('Profile (e2e)', () => {
   })
 
   it('should be able to get user profile', async () => {
-    await supertest(app.server)
-      .post('/users')
-      .send({
-        name: 'Davison Mota',
-        email: 'davison@gmail.com',
-        password: '123456'
-      })
-
-    const authResponse = await supertest(app.server)
-      .post('/sessions')
-      .send({
-        email: 'davison@gmail.com',
-        password: '123456'
-      })
-
-    const { token } = authResponse.body
+    const { token } = await createAndAuthenticateUser(app)
 
     const profileResponse = await supertest(app.server)
       .get('/me')

@@ -16,5 +16,5 @@ export async function search (
   const searchGymsUseCase = makeSearchGymsUseCase()
 
   const gyms = await searchGymsUseCase.execute({ query, page })
-  return replay.status(201).send(gyms)
+  return replay.status(200).send(gyms)
 }
