@@ -20,13 +20,28 @@ export async function authenticate (
     const authenticateUseCase = new AuthenticateUseCase(prismaUsersRepository)
     const { user } = await authenticateUseCase.execute({ email, password })
 
-    const token = await replay.jwtSign({}, {
+    const accessToken = await replay.jwtSign({}, {
       sign: {
         sub: user.id
       }
     })
 
-    return replay.status(200).send({ user, token })
+    const refreshToken = await replay.jwtSign({}, {
+      sign: {
+        sub: user.id,
+        expiresIn: '7d'
+      }
+    })
+
+    return replay
+      .setCookie('refreshToken', refreshToken, {
+        path: '/', // quais rotas tem acesso à esse cookie
+        secure: true,
+        sameSite: true,
+        httpOnly: true
+      })
+      .status(200)
+      .send({ user, token: accessToken })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return replay.status(400).send({ message: error.message })
