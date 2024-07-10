@@ -20,13 +20,17 @@ export async function authenticate (
     const authenticateUseCase = new AuthenticateUseCase(prismaUsersRepository)
     const { user } = await authenticateUseCase.execute({ email, password })
 
-    const accessToken = await replay.jwtSign({}, {
+    const accessToken = await replay.jwtSign({
+      role: user.role
+    }, {
       sign: {
         sub: user.id
       }
     })
 
-    const refreshToken = await replay.jwtSign({}, {
+    const refreshToken = await replay.jwtSign({
+      role: user.role
+    }, {
       sign: {
         sub: user.id,
         expiresIn: '7d'
@@ -41,7 +45,14 @@ export async function authenticate (
         httpOnly: true
       })
       .status(200)
-      .send({ user, token: accessToken })
+      .send({
+        user: {
+          id: user.id,
+          name: user.name,
+          email: user.email
+        },
+        token: accessToken
+      })
   } catch (error) {
     if (error instanceof InvalidCredentialsError) {
       return replay.status(400).send({ message: error.message })

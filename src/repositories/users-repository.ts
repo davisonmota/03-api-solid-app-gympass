@@ -9,6 +9,7 @@ export interface User {
   name: string
   email: string
   passwordHash: string
+  role: string
 }
 
 export interface UsersRepository {

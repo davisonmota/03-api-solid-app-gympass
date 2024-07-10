@@ -7,13 +7,19 @@ export async function refresh (
   try {
     await request.jwtVerify({ onlyCookie: true }) // verifica o Token que está no cookie
 
-    const accessToken = await replay.jwtSign({}, {
+    const { role } = request.user
+
+    const accessToken = await replay.jwtSign({
+      role
+    }, {
       sign: {
         sub: request.user.sub
       }
     })
 
-    const refreshToken = await replay.jwtSign({}, {
+    const refreshToken = await replay.jwtSign({
+      role
+    }, {
       sign: {
         sub: request.user.sub,
         expiresIn: '7d'

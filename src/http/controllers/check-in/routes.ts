@@ -1,5 +1,6 @@
 import { type FastifyInstance } from 'fastify'
 
+import { verifyUserRole } from '@/http/middleware/verify-user-role'
 import { verifyJWT } from '../../middleware/verifyJWT'
 import { create } from './create'
 import { history } from './history'
@@ -13,5 +14,9 @@ export async function checkInsRoutes (app: FastifyInstance): Promise<void> {
   app.get('/check-ins/metrics', metrics)
 
   app.post('/gyms/:gymId/check-ins', create)
-  app.patch('/check-ins/:checkInId/validate', validate)
+
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  app.patch('/check-ins/:checkInId/validate',
+    { onRequest: [verifyUserRole('ADMIN')] },
+    validate)
 }

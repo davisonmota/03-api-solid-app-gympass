@@ -1,6 +1,6 @@
 import { type User, type UsersRepository } from '@/repositories/users-repository'
-import { InvalidCredentialsError } from './erros/invalid-credentials-error'
 import { compare } from 'bcryptjs'
+import { InvalidCredentialsError } from './erros/invalid-credentials-error'
 
 interface Input {
   email: string
@@ -31,7 +31,8 @@ export class AuthenticateUseCase {
       user: {
         id: user.id,
         name: user.name,
-        email: user.email
+        email: user.email,
+        role: user.role
       }
     }
   }
