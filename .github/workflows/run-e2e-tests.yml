@@ -2,6 +2,8 @@ name: Run e2e Tests
 
 on: [pull_request]
 
+
+
 jobs:
   run-unit-tests:
     name: Run e2e Test
@@ -18,6 +20,10 @@ jobs:
           POSTGRESQL_DATABASE: apisolid
 
     steps:
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+        
       - uses: actions/checkout@v47
       - uses: actions/setup-node@v4
         with:
