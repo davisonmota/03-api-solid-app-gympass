@@ -8,7 +8,7 @@ jobs:
   run-unit-tests:
     name: Run e2e Test
     runs-on: ubuntu-latest
-    
+
     services: 
       postgres:
         image: bitnami/postgresql
@@ -20,18 +20,19 @@ jobs:
           POSTGRESQL_DATABASE: apisolid
 
     steps:
-      - name: Sleep for 30 seconds
-        run: sleep 30s
-        shell: bash
-        
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
-
+      
+      - name: Sleep for 30 seconds
+        run: sleep 30s
+        shell: bash
+        
       - run: npm ci
       - run: npm run test:e2e
+
         env:
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
