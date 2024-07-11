@@ -23,6 +23,6 @@
 
 ## Requisitos Não-Funcionais
 - [x] A senha do  usuário precisa estar criptografada
-- [x] Os dados da aplicação precisam estar persistidas em um Banco de Dados
+- [x] Os dados da  aplicação precisam estar persistidas em um Banco de Dados
 - [x] Todas as listas de dados precisão estar paginadas com 20 items por página
 - [x] O usuário deve ser identificado por um JWT
