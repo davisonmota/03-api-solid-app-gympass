@@ -24,8 +24,8 @@ jobs:
         run: sleep 30s
         shell: bash
         
-      - uses: actions/checkout@v47
       - uses: actions/setup-node@v4
+      - uses: actions/checkout@v4
         with:
           node-version: 20
           cache: 'npm'
