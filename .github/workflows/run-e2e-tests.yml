@@ -23,13 +23,6 @@ jobs:
           --health-retries 5
 
     steps:
-      - uses: actions/checkout@v47
-        enviroments:
-          - POSTGRESQL_USERNAME=docker
-          - POSTGRESQL_PASSWORD=docker
-          - POSTGRESQL_DATABASE=apisolid
-
-    steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
