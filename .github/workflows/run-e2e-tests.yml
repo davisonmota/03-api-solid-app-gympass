@@ -6,7 +6,7 @@ jobs:
   run-unit-tests:
     name: Run e2e Test
     runs-on: ubuntu-latest
-    
+
     services: 
       postgres:
         image: bitnami/postgresql
@@ -24,6 +24,13 @@ jobs:
 
     steps:
       - uses: actions/checkout@v47
+        enviroments:
+          - POSTGRESQL_USERNAME=docker
+          - POSTGRESQL_PASSWORD=docker
+          - POSTGRESQL_DATABASE=apisolid
+
+    steps:
+      - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: 20
@@ -31,6 +38,7 @@ jobs:
 
       - run: npm ci
       - run: npm run test:e2e
+
         env:
           JWT_SECRET: testing
           DATABASE_URL: "postgresql://docker:docker@localhost:5432/apisolid?schema=public"
