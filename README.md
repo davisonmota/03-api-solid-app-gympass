@@ -20,6 +20,7 @@
 - [x] O check-in só pode ser validado por administradores
 - [x] A academia só pode ser cadastrada por administradores
 
+
 ## Requisitos Não-Funcionais
 - [x] A senha do usuário precisa estar criptografada
 - [x] Os dados da aplicação precisam estar persistidas em um Banco de Dados
